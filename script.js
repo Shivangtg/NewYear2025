@@ -6,8 +6,9 @@ let cminutes=document.querySelector(".minutes");
 let cseconds=document.querySelector(".second");
 let differenceContainer=document.querySelector(".timing");
 let counter=document.querySelector(".counter span");
-
-
+let preview_btn=document.querySelector(".preview-btn");
+let goBackBtn=document.querySelector(".go-back")
+let preview_screen=document.querySelector(".preview-screen");
 
 // Function to calculate the time difference
 function updateCountdown() {
@@ -31,6 +32,7 @@ function updateCountdown() {
   } else {
     counter.innerHTML="The target date has passed!"
     clearInterval(countdownInterval); // Stop the interval
+    preview_screen.classList.add("hidden")
   }
 }
 
@@ -61,24 +63,22 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 window.addEventListener("resize",adjustingFontSize);
 adjustingFontSize();
 
+preview_btn.addEventListener("click",function(){
+    
+    preview_screen.classList.toggle("hidden")
+  })
+  
+  goBackBtn.addEventListener("click",function(){
+    preview_screen.classList.toggle("hidden")
+  })
+  
+
+
+
+
+
+
 // Creativity corner
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const radius_input=document.querySelector(".radius");
