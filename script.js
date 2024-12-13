@@ -58,10 +58,136 @@ function adjustingFontSize(){
 // Update the countdown every second
 const countdownInterval = setInterval(updateCountdown, 1000);
 
-window.addEventListener("resize",adjustingFontSize)
-adjustingFontSize()
+window.addEventListener("resize",adjustingFontSize);
+adjustingFontSize();
 
-// Making rainbow border rotate
+// Creativity corner
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const radius_input=document.querySelector(".radius");
+const color_input=document.querySelector(".color");
+// console.log(color_input.value,radius_input.value)
+
+const canvas=document.getElementById("MyCanvas");
+
+
+const ctx=canvas.getContext('2d');
+console.log(ctx);
+const reset_btn=document.querySelector(".reset")
+
+
+
+function resizeCanvas() {
+  const canvas = document.getElementById('MyCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Get the container dimensions
+  const containerWidth = canvas.parentElement.offsetWidth;
+  const containerHeight = canvas.parentElement.offsetHeight;
+
+  // Adjust canvas resolution and CSS dimensions
+  canvas.width = containerWidth * devicePixelRatio;
+  canvas.height = containerHeight * devicePixelRatio;
+  canvas.style.width = `${containerWidth}px`;
+  canvas.style.height = `${containerHeight}px`;
+
+  // Scale the drawing context
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+}
+
+// Call on load and resize
+window.addEventListener('resize', resizeCanvas);
+
+
+
+
+
+
+let isDraging=false
+// document.addEventListener("click",function(e){
+//   console.log(e)
+//   const rect = e.target.getBoundingClientRect();
+//   console.log(e.target==canvas,rect.x,rect.y,e.x,e.y,e.clientX,e.clientY)
+//     let radius=radius_input.value;
+//     let color=color_input.value
+//     // ctx.beginPath()
+//     ctx.fillStyle=`${color}`;
+//     ctx.beginPath();
+//     // ctx.arc()
+//     ctx.arc(e.offsetX,e.offsetY,radius,0,2*Math.PI)
+//     // console.log(ctx.arc(e.x,e.y,radius,0,2*Math.PI))
+//     ctx.fill();
+//     // ctx.ellipse()
+    
+// })
+
+
+reset_btn.addEventListener("click",function(){
+  ctx.reset();
+  resizeCanvas()
+})
+
+
+
+canvas.addEventListener("mousedown",function(e){
+  console.log(e)
+  const rect = e.target.getBoundingClientRect();
+  console.log(rect.x,rect.y,e.x,e.y,e.clientX,e.clientY)
+    let radius=radius_input.value;
+    let color=color_input.value
+    // ctx.beginPath()
+    ctx.fillStyle=`${color}`;
+    ctx.beginPath();
+    // ctx.arc()
+    ctx.arc(e.offsetX,e.offsetY,radius,0,2*Math.PI)
+    // console.log(ctx.arc(e.x,e.y,radius,0,2*Math.PI))
+    ctx.fill();
+    // ctx.ellipse()
+    if(e.target==canvas){
+    isDraging=true
+  }else{
+    isDraging=false
+  }
+})
+
+canvas.addEventListener("mousemove",function(e){
+  if(isDraging){
+  console.log(e)
+  const rect = e.target.getBoundingClientRect();
+  console.log(e.target==canvas,rect.x,rect.y,e.x,e.y,e.clientX,e.clientY)
+    let radius=radius_input.value;
+    let color=color_input.value
+    // ctx.beginPath()
+    ctx.fillStyle=`${color}`;
+    ctx.beginPath();
+    // ctx.arc()
+    ctx.arc(e.offsetX,e.offsetY,radius,0,2*Math.PI)
+    // console.log(ctx.arc(e.x,e.y,radius,0,2*Math.PI))
+    ctx.fill();
+    // ctx.ellipse()
+  }
+})
+
+canvas.addEventListener("mouseup",function(){
+  isDraging=false
+})
+
+
+resizeCanvas();
